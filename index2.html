@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAGANI09KILLER - Firebase & Supabase Edition</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        h1 { color: #ff4757; }
+        .status-box {
+            background: #2f3542;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .btn {
+            background: #2ed573;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn-supabase { background: #3ecf8e; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>BAGANI09KILLER 🎮</h1>
+        <p>Mifumo ya Online Database Imeunganishwa</p>
+        
+        <div id="db-status" class="status-box">Inajaribu kuunganisha mifumo...</div>
+
+        <!-- Sehemu ya Majaribio -->
+        <button class="btn" onclick="washaFirebaseRealtime()">Jaribu Firebase (Online Status)</button>
+        <button class="btn btn-supabase" onclick="lindaDataSupabase()">Jaribu Supabase (Save Member)</button>
+    </div>
+
+    <!-- Kuunganisha Firebase na Supabase SDKs -->
+    <script type="module">
+        // 1. Kuanzisha Firebase
+        import { initializeApp } from "https://gstatic.com";
+        import { getDatabase, ref, set, onValue } from "https://gstatic.com";
+
+        // ⚠️ BADILISHA HAPA UKIPATA CONFIG ZA FIREBASE
+        const firebaseConfig = {
+            apiKey: "WEKA_API_KEY_YAKO",
+            authDomain: "WEKA_AUTH_DOMAIN",
+            databaseURL: "WEKA_DATABASE_URL",
+            projectId: "WEKA_PROJECT_ID",
+            storageBucket: "WEKA_STORAGE_BUCKET",
+            messagingSenderId: "WEKA_MESSAGING_SENDER",
+            appId: "WEKA_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const rtdb = getDatabase(app);
+
+        // 2. Kuanzisha Supabase
+        import { createClient } from 'https://jsdelivr.net';
+
+        // ⚠️ BADILISHA HAPA UKIPATA URL NA KEY ZA SUPABASE
+        const supabaseUrl = 'https://WEKA_PROJECT_ID.supabase.co';
+        const supabaseKey = 'WEKA_SUPABASE_ANON_KEY';
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        // Onyesha hali ya mifumo
+        document.getElementById('db-status').innerText = "⚡ Mifumo Tayari! Weka Config Zako Ianze Kazi.";
+
+        // Kazi za Firebase (Realtime)
+        window.washaFirebaseRealtime = function() {
+            set(ref(rtdb, 'users/killer_player'), {
+                username: "Bagani09Killer",
+                status: "🟢 Online",
+                last_seen: new Date().toLocaleTimeString()
+            }).then(() => {
+                alert("Firebase Imetuma data: Player yuko Online!");
+            }).catch(err => {
+                alert("Weka kwanza Firebase Config zako sahihi!");
+            });
+        }
+
+        // Kazi za Supabase (Database kuu)
+        window.lindaDataSupabase = async function() {
+            const { data, error } = await supabase
+                .from('members')
+                .insert([{ name: 'Bagani Player 1', points: 100 }]);
+
+            if (error) {
+                alert("Supabase inasubiri Config zako na Table ya 'members'!");
+            } else {
+                alert("Mchezaji amehifadhiwa salama Supabase!");
+            }
+        }
+    </script>
+</body>
+</html>
