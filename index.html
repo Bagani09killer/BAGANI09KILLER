@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAGANI09KILLER</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#0b0f14;
+  color:white;
+}
+
+header{
+  background:linear-gradient(135deg,#111827,#064e3b);
+  padding:25px 15px;
+  text-align:center;
+}
+
+header h1{margin:0;font-size:30px}
+header p{color:#b7f7d0}
+
+nav{
+  display:flex;
+  overflow:auto;
+  background:#111827;
+  padding:8px;
+  gap:7px;
+}
+
+nav button{
+  border:0;
+  padding:11px 15px;
+  border-radius:20px;
+  background:#1f2937;
+  color:white;
+  white-space:nowrap;
+}
+
+nav button:hover{
+  background:#10b981;
+}
+
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:15px;
+}
+
+.card{
+  background:#151d27;
+  border:1px solid #263241;
+  border-radius:15px;
+  padding:18px;
+  margin:14px 0;
+  box-shadow:0 5px 20px #0005;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #374151;
+  border-radius:10px;
+  background:#0f172a;
+  color:white;
+}
+
+button.main{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  background:#10b981;
+  color:white;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.online{
+  color:#22c55e;
+  font-weight:bold;
+}
+
+.member{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px;
+  border-bottom:1px solid #263241;
+}
+
+.badge{
+  background:#064e3b;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.hidden{
+  display:none;
+}
+
+footer{
+  text-align:center;
+  padding:30px 15px;
+  margin-top:30px;
+  background:#111827;
+  color:#cbd5e1;
+}
+
+.activeBox{
+  background:#052e1b;
+  border:1px solid #16a34a;
+  border-radius:12px;
+  padding:15px;
+  margin-top:15px;
+}
+
+.passwordBox{
+  text-align:center;
+}
+
+.passwordBox input{
+  text-align:center;
+  font-size:18px;
+}
+
+.logout{
+  background:#dc2626 !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🔥 BAGANI09KILLER</h1>
+  <p>Gaming Community • PUBG • eFootball • Tournament</p>
+</header>
+
+<nav>
+  <button onclick="showPage('home')">🏠 Home</button>
+  <button onclick="showPage('members')">👥 Members</button>
+  <button onclick="showPage('active')">🟢 Active People</button>
+  <button onclick="showPage('tournament')">🏆 Tournament</button>
+  <button onclick="showPage('posts')">📝 Posts</button>
+  <button onclick="showPage('advice')">💡 Ushauri</button>
+  <button onclick="showPage('login')">🔐 Login</button>
+</nav>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home">
+
+  <div class="card">
+    <h2>Karibu BAGANI09KILLER 👑</h2>
+
+    <p>
+      Jiunge na group yetu, shiriki tournaments,
+      posts na michezo.
+    </p>
+
+    <p class="online">
+      🟢 Mfumo wa Members Online
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>🔥 Join Code</h3>
+
+    <p>Code ya kujiunga:</p>
+
+    <h2>1234</h2>
+  </div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section id="login" class="hidden">
+
+  <div class="card">
+
+    <h2>🔐 LOGIN</h2>
+
+    <input
+      id="loginName"
+      placeholder="Username"
+    >
+
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="Password"
+    >
+
+    <button
+      class="main"
+      onclick="login()"
+    >
+      🔐 INGIA
+    </button>
+
+    <button
+      class="main logout"
+      onclick="logout()"
+    >
+      🚪 LOGOUT
+    </button>
+
+    <hr>
+
+    <h3>📝 REGISTER</h3>
+
+    <input
+      id="regName"
+      placeholder="Jina lako"
+    >
+
+    <input
+      id="regPassword"
+      type="password"
+      placeholder="Password yako"
+    >
+
+    <input
+      id="joinCode"
+      placeholder="Join Code"
+    >
+
+    <button
+      class="main"
+      onclick="register()"
+    >
+      📝 JIUNGE
+    </button>
+
+    <p id="loginMessage"></p>
+
+  </div>
+
+</section>
+
+
+<!-- MEMBERS -->
+<section id="members" class="hidden">
+
+  <div class="card">
+
+    <h2>👥 Members</h2>
+
+    <div id="membersList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- ACTIVE PEOPLE -->
+<section id="active" class="hidden">
+
+  <div class="card">
+
+    <h2>🟢 ACTIVE PEOPLE</h2>
+
+    <div class="activeBox">
+
+      <h3 id="activeCount">
+        🟢 0 People Active
+      </h3>
+
+      <div id="activeList"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- TOURNAMENT -->
+<section id="tournament" class="hidden">
+
+  <div class="card">
+
+    <h2>🏆 TOURNAMENT</h2>
+
+    <h3>🎮 PUBG Tournament</h3>
+
+    <p>
+      Entry Fee:
+      <b>TSh 500</b>
+    </p>
+
+    <p>
+      Prize:
+      <b>UC / Prize</b>
+    </p>
+
+    <p>
+      Status:
+      <span class="badge">OPEN</span>
+    </p>
+
+    <input
+      id="tournamentName"
+      placeholder="Jina lako"
+    >
+
+    <input
+      id="phone"
+      placeholder="Namba ya simu"
+    >
+
+    <select id="game">
+
+      <option>PUBG</option>
+      <option>eFootball</option>
+
+    </select>
+
+    <button
+      class="main"
+      onclick="joinTournament()"
+    >
+      🏆 JOIN TOURNAMENT
+    </button>
+
+    <p id="tournamentMessage"></p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>💳 Malipo</h3>
+
+    <p>Tuma malipo kwa namba:</p>
+
+    <h2>0770766022</h2>
+
+    <p>
+      Baada ya malipo, weka taarifa zako hapo juu.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>👥 Washiriki</h3>
+
+    <div id="playersList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- POSTS -->
+<section id="posts" class="hidden">
+
+  <div class="card">
+
+    <h2>📝 Posts</h2>
+
+    <input
+      id="postName"
+      placeholder="Jina lako"
+    >
+
+    <textarea
+      id="postText"
+      rows="4"
+      placeholder="Andika post yako..."
+    ></textarea>
+
+    <button
+      class="main"
+      onclick="addPost()"
+    >
+      POST
+    </button>
+
+  </div>
+
+  <div id="postList"></div>
+
+</section>
+
+
+<!-- ADVICE -->
+<section id="advice" class="hidden">
+
+  <div class="card">
+
+    <h2>💡 Toa Ushauri</h2>
+
+    <input
+      id="adviceName"
+      placeholder="Jina lako"
+    >
+
+    <textarea
+      id="adviceText"
+      rows="5"
+      placeholder="Andika ushauri wako hapa..."
+    ></textarea>
+
+    <button
+      class="main"
+      onclick="addAdvice()"
+    >
+      TUMA USHAURI
+    </button>
+
+    <p id="adviceMessage"></p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>💡 Ushauri uliotolewa</h3>
+
+    <div id="adviceList"></div>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<footer>
+
+  <h3>🔥 BAGANI09KILLER</h3>
+
+  <p>📞 0770766022</p>
+
+  <p>© 2026 BAGANI09KILLER</p>
+
+</footer>
+
+
+<script>
+
+let users =
+JSON.parse(
+localStorage.getItem("baganiUsers") || "[]"
+);
+
+let players =
+JSON.parse(
+localStorage.getItem("baganiPlayers") || "[]"
+);
+
+let posts =
+JSON.parse(
+localStorage.getItem("baganiPosts") || "[]"
+);
+
+let advice =
+JSON.parse(
+localStorage.getItem("baganiAdvice") || "[]"
+);
+
+let currentUser =
+localStorage.getItem("baganiCurrentUser") || null;
+
+
+/* PAGE */
+
+function showPage(page){
+
+  document
+  .querySelectorAll("section")
+  .forEach(s=>{
+    s.classList.add("hidden");
+  });
+
+  document
+  .getElementById(page)
+  .classList.remove("hidden");
+
+  if(page==="members")
+    showMembers();
+
+  if(page==="active")
+    showActive();
+
+  if(page==="tournament")
+    showPlayers();
+
+  if(page==="posts")
+    showPosts();
+
+  if(page==="advice")
+    showAdvice();
+
+}
+
+
+/* REGISTER */
+
+function register(){
+
+  let name =
+  document
+  .getElementById("regName")
+  .value
+  .trim();
+
+  let password =
+  document
+  .getElementById("regPassword")
+  .value;
+
+  let code =
+  document
+  .getElementById("joinCode")
+  .value
+  .trim();
+
+
+  if(code !== "1234"){
+
+    alert("❌ Join Code si sahihi.");
+
+    return;
+  }
+
+
+  if(!name || !password){
+
+    alert(
+      "❌ Jaza username na password."
+    );
+
+    return;
+  }
+
+
+  if(
+    users.some(
+      u => u.name === name
+    )
+  ){
+
+    alert(
+      "❌ Username hii tayari ipo."
+    );
+
+    return;
+  }
+
+
+  users.push({
+
+    name:name,
+
+    password:password,
+
+    online:false,
+
+    lastSeen:null
+
+  });
+
+
+  saveUsers();
+
+
+  alert(
+    "✅ Account imetengenezwa. Sasa login."
+  );
+
+}
+
+
+/* LOGIN */
+
+function login(){
+
+  let name =
+  document
+  .getElementById("loginName")
+  .value
+  .trim();
+
+  let password =
+  document
+  .getElementById("loginPassword")
+  .value;
+
+
+  let user =
+  users.find(
+    u =>
+    u.name === name &&
+    u.password === password
+  );
+
+
+  if(!user){
+
+    document
+    .getElementById("loginMessage")
+    .innerHTML =
+    "❌ Username au password si sahihi.";
+
+    return;
+  }
+
+
+  user.online = true;
+
+  user.lastSeen =
+  new Date()
+  .toLocaleString();
+
+
+  currentUser = name;
+
+  localStorage.setItem(
+    "baganiCurrentUser",
+    name
+  );
+
+
+  saveUsers();
+
+
+  document
+  .getElementById("loginMessage")
+  .innerHTML =
+  "🟢 Umeingia vizuri, " +
+  name +
+  "!";
+
+
+  showPage("active");
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+  if(!currentUser){
+
+    alert(
+      "Hakuna account iliyoingia."
+    );
+
+    return;
+  }
+
+
+  let user =
+  users.find(
+    u => u.name === currentUser
+  );
+
+
+  if(user){
+
+    user.online = false;
+
+    user.lastSeen =
+    new Date()
+    .toLocaleString();
+
+  }
+
+
+  currentUser = null;
+
+  localStorage.removeItem(
+    "baganiCurrentUser"
+  );
+
+
+  saveUsers();
+
+
+  alert(
+    "Umetoka kwenye account."
+  );
+
+
+  showPage("login");
+
+}
+
+
+/* MEMBERS */
+
+function showMembers(){
+
+  let box =
+  document
+  .getElementById("membersList");
+
+
+  if(users.length===0){
+
+    box.innerHTML =
+    "<p>Bado hakuna members.</p>";
+
+    return;
+  }
+
+
+  box.innerHTML =
+  users.map(u=>`
+
+    <div class="member">
+
+      <div>
+
+        <b>${u.name}</b><br>
+
+        ${
+          u.online
+          ?
+          '<span class="online">🟢 Online</span>'
+          :
+          '<span>⚫ Offline</span>'
+        }
+
+      </div>
+
+      <small>
+
+        ${
+          u.online
+          ?
+          "Active now"
+          :
+          "Last seen: " +
+          (u.lastSeen || "N/A")
+        }
+
+      </small>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* ACTIVE PEOPLE */
+
+function showActive(){
+
+  let box =
+  document
+  .getElementById("activeList");
+
+
+  let active =
+  users.filter(
+    u => u.online === true
+  );
+
+
+  document
+  .getElementById("activeCount")
+  .innerHTML =
+  "🟢 " +
+  active.length +
+  " People Active";
+
+
+  if(active.length === 0){
+
+    box.innerHTML =
+    "<p>Hakuna mtu aliye active kwa sasa.</p>";
+
+    return;
+  }
+
+
+  box.innerHTML =
+  active.map(u=>`
+
+    <div class="member">
+
+      <div>
+
+        <b>👤 ${u.name}</b>
+
+        <br>
+
+        <span class="online">
+          🟢 ACTIVE NOW
+        </span>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* TOURNAMENT */
+
+function joinTournament(){
+
+  let name =
+  document
+  .getElementById("tournamentName")
+  .value
+  .trim();
+
+  let phone =
+  document
+  .getElementById("phone")
+  .value
+  .trim();
+
+  let game =
+  document
+  .getElementById("game")
+  .value;
+
+
+  if(!name || !phone){
+
+    alert(
+      "Weka jina na namba ya simu."
+    );
+
+    return;
+  }
+
+
+  players.push({
+
+    name:name,
+
+    phone:phone,
+
+    game:game,
+
+    date:
+    new Date()
+    .toLocaleString()
+
+  });
+
+
+  localStorage.setItem(
+    "baganiPlayers",
+    JSON.stringify(players)
+  );
+
+
+  document
+  .getElementById("tournamentMessage")
+  .innerHTML =
+  "✅ Umejiandikisha kwenye tournament.";
+
+
+  showPlayers();
+
+}
+
+
+function showPlayers(){
+
+  let box =
+  document
+  .getElementById("playersList");
+
+
+  if(players.length===0){
+
+    box.innerHTML =
+    "<p>Bado hakuna mshiriki.</p>";
+
+    return;
+  }
+
+
+  box.innerHTML =
+  players.map((p,i)=>`
+
+    <div class="member">
+
+      <div>
+
+        <b>
+          #${i+1} ${p.name}
+        </b>
+
+        <br>
+
+        🎮 ${p.game}
+
+      </div>
+
+      <span class="badge">
+        REGISTERED
+      </span>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* POSTS */
+
+function addPost(){
+
+  let name =
+  document
+  .getElementById("postName")
+  .value
+  .trim();
+
+  let text =
+  document
+  .getElementById("postText")
+  .value
+  .trim();
+
+
+  if(!name || !text){
+
+    alert(
+      "Jaza jina na post."
+    );
+
+    return;
+  }
+
+
+  posts.unshift({
+
+    name:name,
+
+    text:text,
+
+    date:
+    new Date()
+    .toLocaleString()
+
+  });
+
+
+  localStorage.setItem(
+    "baganiPosts",
+    JSON.stringify(posts)
+  );
+
+
+  document
+  .getElementById("postText")
+  .value="";
+
+
+  showPosts();
+
+}
+
+
+function showPosts(){
+
+  let box =
+  document
+  .getElementById("postList");
+
+
+  box.innerHTML =
+  posts.map(p=>`
+
+    <div class="card">
+
+      <b>👤 ${p.name}</b>
+
+      <small>
+        ${p.date}
+      </small>
+
+      <p>
+        ${p.text}
+      </p>
+
+      ❤️ Like &nbsp;&nbsp;
+      💬 Comment
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* ADVICE */
+
+function addAdvice(){
+
+  let name =
+  document
+  .getElementById("adviceName")
+  .value
+  .trim();
+
+  let text =
+  document
+  .getElementById("adviceText")
+  .value
+  .trim();
+
+
+  if(!name || !text){
+
+    alert(
+      "Jaza jina na ushauri."
+    );
+
+    return;
+  }
+
+
+  advice.unshift({
+
+    name:name,
+
+    text:text,
+
+    date:
+    new Date()
+    .toLocaleString()
+
+  });
+
+
+  localStorage.setItem(
+    "baganiAdvice",
+    JSON.stringify(advice)
+  );
+
+
+  document
+  .getElementById("adviceMessage")
+  .innerHTML =
+  "✅ Ushauri umetumwa.";
+
+
+  document
+  .getElementById("adviceText")
+  .value="";
+
+
+  showAdvice();
+
+}
+
+
+function showAdvice(){
+
+  let box =
+  document
+  .getElementById("adviceList");
+
+
+  box.innerHTML =
+  advice.map(a=>`
+
+    <div class="card">
+
+      <b>
+        👤 ${a.name}
+      </b>
+
+      <p>
+        ${a.text}
+      </p>
+
+      <small>
+        ${a.date}
+      </small>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* SAVE USERS */
+
+function saveUsers(){
+
+  localStorage.setItem(
+    "baganiUsers",
+    JSON.stringify(users)
+  );
+
+}
+
+
+/* START */
+
+showPage("home");
+
+</script>
+
+</body>
+  </html>
