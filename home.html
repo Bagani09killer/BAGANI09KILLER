@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BAGANI09KILLER</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#080d12;
+color:#fff;
+}
+
+header{
+padding:25px 15px;
+text-align:center;
+background:linear-gradient(135deg,#111827,#065f46);
+}
+
+header h1{
+margin:0;
+font-size:30px;
+}
+
+header p{
+color:#b7f7d0;
+}
+
+nav{
+display:flex;
+gap:7px;
+overflow-x:auto;
+padding:8px;
+background:#111827;
+position:sticky;
+top:0;
+z-index:20;
+}
+
+nav button{
+border:0;
+border-radius:20px;
+padding:11px 15px;
+background:#1f2937;
+color:#fff;
+white-space:nowrap;
+}
+
+nav button:hover{
+background:#10b981;
+}
+
+.container{
+max-width:750px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:#151d27;
+border:1px solid #263241;
+border-radius:15px;
+padding:18px;
+margin:14px 0;
+box-shadow:0 5px 20px #0005;
+}
+
+input,textarea,select{
+width:100%;
+padding:13px;
+margin:7px 0;
+border:1px solid #374151;
+border-radius:10px;
+background:#0f172a;
+color:#fff;
+}
+
+button.main{
+width:100%;
+padding:13px;
+margin-top:8px;
+border:0;
+border-radius:10px;
+background:#10b981;
+color:#fff;
+font-weight:bold;
+}
+
+button.red{
+background:#dc2626;
+}
+
+button.blue{
+background:#2563eb;
+}
+
+.hidden{
+display:none;
+}
+
+.online{
+color:#22c55e;
+font-weight:bold;
+}
+
+.member{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+border-bottom:1px solid #263241;
+}
+
+.badge{
+background:#064e3b;
+padding:5px 9px;
+border-radius:20px;
+font-size:12px;
+}
+
+.chatBox{
+height:420px;
+overflow-y:auto;
+background:#0b1118;
+padding:12px;
+border-radius:12px;
+}
+
+.message{
+margin:8px 0;
+padding:10px;
+background:#1f2937;
+border-radius:12px;
+}
+
+.message.me{
+background:#065f46;
+margin-left:35px;
+}
+
+.message small{
+color:#cbd5e1;
+}
+
+.postImg{
+width:100%;
+max-height:450px;
+object-fit:cover;
+border-radius:12px;
+margin-top:10px;
+}
+
+.like{
+cursor:pointer;
+color:#f87171;
+font-weight:bold;
+}
+
+.status{
+padding:7px 10px;
+border-radius:20px;
+display:inline-block;
+font-size:12px;
+}
+
+.pending{
+background:#854d0e;
+}
+
+.approved{
+background:#166534;
+}
+
+.rejected{
+background:#991b1b;
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:#111827;
+margin-top:30px;
+color:#cbd5e1;
+}
+
+#loading{
+position:fixed;
+inset:0;
+background:#080d12;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:100;
+font-size:20px;
+}
+
+.preview{
+max-width:100%;
+max-height:250px;
+border-radius:12px;
+margin-top:10px;
+}
+
+hr{
+border-color:#263241;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">
+🔥 BAGANI09KILLER inafunguka...
+</div>
+
+<header>
+<h1>🔥 BAGANI09KILLER</h1>
+<p>PUBG • eFootball • Tournament • Community</p>
+</header>
+
+<nav>
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('members')">👥 Members</button>
+<button onclick="showPage('active')">🟢 Active</button>
+<button onclick="showPage('chat')">💬 Chat</button>
+<button onclick="showPage('posts')">📸 Posts</button>
+<button onclick="showPage('tournament')">🏆 Tournament</button>
+<button onclick="showPage('payment')">💰 Malipo</button>
+<button onclick="showPage('advice')">💡 Ushauri</button>
+<button onclick="showPage('login')">🔐 Login</button>
+</nav>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home">
+
+<div class="card">
+<h2>🔥 Karibu BAGANI09KILLER</h2>
+
+<p>
+Karibu kwenye gaming community yetu.
+Jiunge, chat, post picha, shiriki tournament
+na wasiliana na members.
+</p>
+
+<p class="online">
+🟢 Mfumo wa Active People
+</p>
+</div>
+
+<div class="card">
+<h3>🔑 Join Code</h3>
+<h2>1234</h2>
+<p>Tumia code hii wakati wa Register.</p>
+</div>
+
+<div class="card">
+<h3>📞 Mawasiliano</h3>
+<p>0770766022</p>
+</div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section id="login" class="hidden">
+
+<div class="card">
+
+<h2>🔐 Login</h2>
+
+<input id="loginEmail"
+placeholder="Email">
+
+<input id="loginPassword"
+type="password"
+placeholder="Password">
+
+<button class="main" onclick="login()">
+🔐 INGIA
+</button>
+
+<p id="loginMessage"></p>
+
+<hr>
+
+<h3>📝 Register</h3>
+
+<input id="regName"
+placeholder="Username">
+
+<input id="regEmail"
+type="email"
+placeholder="Email">
+
+<input id="regPassword"
+type="password"
+placeholder="Password">
+
+<input id="joinCode"
+placeholder="Join Code">
+
+<button class="main" onclick="register()">
+📝 JIUNGE
+</button>
+
+<p id="registerMessage"></p>
+
+<button class="main red" onclick="logout()">
+🚪 LOGOUT
+</button>
+
+</div>
+
+</section>
+
+
+<!-- MEMBERS -->
+<section id="members" class="hidden">
+
+<div class="card">
+
+<h2>👥 Members</h2>
+
+<div id="membersList">
+Inapakia...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ACTIVE -->
+<section id="active" class="hidden">
+
+<div class="card">
+
+<h2>🟢 Active People</h2>
+
+<h3 id="activeCount">
+🟢 0 Active
+</h3>
+
+<div id="activeList">
+Inapakia...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CHAT -->
+<section id="chat" class="hidden">
+
+<div class="card">
+
+<h2>💬 Community Chat</h2>
+
+<div id="chatBox" class="chatBox">
+<p>Ingia kwanza ili kutumia chat.</p>
+</div>
+
+<input
+id="chatMessage"
+placeholder="Andika ujumbe..."
+>
+
+<button class="main" onclick="sendMessage()">
+📤 TUMA UJUMBE
+</button>
+
+</div>
+
+</section>
+
+
+<!-- POSTS -->
+<section id="posts" class="hidden">
+
+<div class="card">
+
+<h2>📸 Post Picha</h2>
+
+<input
+id="postCaption"
+placeholder="Andika caption..."
+>
+
+<input
+id="postImage"
+type="file"
+accept="image/*"
+onchange="previewImage(event)"
+>
+
+<img
+id="imagePreview"
+class="preview hidden"
+>
+
+<button
+class="main"
+onclick="createPost()"
+>
+📤 POST PICHA
+</button>
+
+<p id="postMessage"></p>
+
+</div>
+
+<div id="postList"></div>
+
+</section>
+
+
+<!-- TOURNAMENT -->
+<section id="tournament" class="hidden">
+
+<div class="card">
+
+<h2>🏆 Tournament</h2>
+
+<h3>🎮 PUBG / eFootball</h3>
+
+<p>
+Entry Fee:
+<b>TSh 500</b>
+</p>
+
+<input
+id="playerName"
+placeholder="Jina la mchezaji"
+>
+
+<input
+id="playerPhone"
+placeholder="Namba ya simu"
+>
+
+<select id="playerGame">
+<option>PUBG</option>
+<option>eFootball</option>
+</select>
+
+<button
+class="main"
+onclick="joinTournament()"
+>
+🏆 JOIN TOURNAMENT
+</button>
+
+<p id="tournamentMessage"></p>
+
+</div>
+
+<div class="card">
+
+<h3>👥 Washiriki</h3>
+
+<div id="playersList"></div>
+
+</div>
+
+</section>
+
+
+<!-- PAYMENT -->
+<section id="payment" class="hidden">
+
+<div class="card">
+
+<h2>💰 MALIPO</h2>
+
+<p>
+Tuma malipo kwa:
+</p>
+
+<h2>📞 0770766022</h2>
+
+<hr>
+
+<label>Aina ya malipo</label>
+
+<select id="paymentType">
+
+<option>Tournament</option>
+<option>Entry Fee</option>
+<option>Other</option>
+
+</select>
+
+<input
+id="paymentAmount"
+type="number"
+placeholder="Kiasi TSh"
+>
+
+<input
+id="transactionId"
+placeholder="Transaction ID / Reference"
+>
+
+<input
+id="paymentPhone"
+placeholder="Namba iliyotumia kutuma pesa"
+>
+
+<button
+class="main"
+onclick="submitPayment()"
+>
+💰 TUMA TAARIFA ZA MALIPO
+</button>
+
+<p id="paymentMessage"></p>
+
+</div>
+
+
+<div class="card">
+
+<h3>📋 Malipo Yangu</h3>
+
+<div id="myPayments">
+Hakuna taarifa.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADVICE -->
+<section id="advice" class="hidden">
+
+<div class="card">
+
+<h2>💡 Ushauri</h2>
+
+<textarea
+id="adviceText"
+rows="5"
+placeholder="Andika ushauri wako..."
+></textarea>
+
+<button
+class="main"
+onclick="sendAdvice()"
+>
+📤 TUMA USHAURI
+</button>
+
+<p id="adviceMessage"></p>
+
+</div>
+
+<div id="adviceList"></div>
+
+</section>
+
+</div>
+
+
+<footer>
+
+<h3>🔥 BAGANI09KILLER</h3>
+
+<p>Gaming Community</p>
+
+<p>📞 0770766022</p>
+
+<p>© 2026 BAGANI09KILLER</p>
+
+</footer>
+
+
+<script>
+
+/* =================================================
+   FIREBASE CONFIG
+   WEKA CONFIG YAKO HAPA
+================================================= */
+
+const firebaseConfig = {
+
+  apiKey: "WEKA_API_KEY",
+  authDomain: "WEKA_PROJECT.firebaseapp.com",
+  databaseURL: "WEKA_DATABASE_URL",
+  projectId: "WEKA_PROJECT_ID",
+  storageBucket: "WEKA_PROJECT.appspot.com",
+  messagingSenderId: "WEKA_SENDER_ID",
+  appId: "WEKA_APP_ID"
+
+};
+
+
+/* FIREBASE START */
+
+firebase.initializeApp(firebaseConfig);
+
+const auth =
+firebase.auth();
+
+const db =
+firebase.database();
+
+const storage =
+firebase.storage();
+
+
+let currentUser = null;
+let currentProfile = null;
+
+
+/* PAGE */
+
+function showPage(page){
+
+document
+.querySelectorAll("section")
+.forEach(s =>
+s.classList.add("hidden")
+);
+
+document
+.getElementById(page)
+.classList.remove("hidden");
+
+if(page==="members")
+loadMembers();
+
+if(page==="active")
+loadActive();
+
+if(page==="chat")
+loadChat();
+
+if(page==="posts")
+loadPosts();
+
+if(page==="tournament")
+loadPlayers();
+
+if(page==="payment")
+loadPayments();
+
+if(page==="advice")
+loadAdvice();
+
+}
+
+
+/* REGISTER */
+
+async function register(){
+
+const name =
+document.getElementById("regName").value.trim();
+
+const email =
+document.getElementById("regEmail").value.trim();
+
+const password =
+document.getElementById("regPassword").value;
+
+const code =
+document.getElementById("joinCode").value.trim();
+
+
+if(code !== "1234"){
+
+alert("❌ Join Code si sahihi.");
+
+return;
+
+}
+
+if(!name || !email || !password){
+
+alert("❌ Jaza taarifa zote.");
+
+return;
+
+}
+
+if(password.length < 6){
+
+alert("❌ Password iwe na angalau characters 6.");
+
+return;
+
+}
+
+try{
+
+const result =
+await auth.createUserWithEmailAndPassword(
+email,
+password
+);
+
+const uid =
+result.user.uid;
+
+await db.ref("users/"+uid).set({
+
+name:name,
+email:email,
+online:true,
+lastSeen:Date.now()
+
+});
+
+alert("✅ Account imetengenezwa!");
+
+}catch(error){
+
+alert("❌ "+error.message);
+
+}
+
+}
+
+
+/* LOGIN */
+
+async function login(){
+
+const email =
+document.getElementById("loginEmail").value.trim();
+
+const password =
+document.getElementById("loginPassword").value;
+
+
+try{
+
+await auth.signInWithEmailAndPassword(
+email,
+password
+);
+
+document.getElementById(
+"loginMessage"
+).innerHTML =
+"🟢 Umeingia vizuri.";
+
+showPage("home");
+
+}catch(error){
+
+document.getElementById(
+"loginMessage"
+).innerHTML =
+"❌ Email au password si sahihi.";
+
+}
+
+}
+
+
+/* AUTH */
+
+auth.onAuthStateChanged(async user=>{
+
+currentUser=user;
+
+if(user){
+
+const ref =
+db.ref("users/"+user.uid);
+
+const snap =
+await ref.once("value");
+
+currentProfile =
+snap.val();
+
+if(!currentProfile){
+
+currentProfile={
+name:user.email.split("@")[0]
+};
+
+await ref.set(currentProfile);
+
+}
+
+await ref.update({
+
+online:true,
+lastSeen:Date.now()
+
+});
+
+setPresence(user.uid);
+
+}else{
+
+currentProfile=null;
+
+}
+
+document
+.getElementById("loading")
+.style.display="none";
+
+});
+
+
+/* LOGOUT */
+
+async function logout(){
+
+if(currentUser){
+
+await db.ref(
+"users/"+currentUser.uid
+).update({
+
+online:false,
+lastSeen:Date.now()
+
+});
+
+await auth.signOut();
+
+}
+
+alert("Umetoka.");
+
+showPage("login");
+
+}
+
+
+/* PRESENCE */
+
+function setPresence(uid){
+
+const ref =
+db.ref("users/"+uid);
+
+const connected =
+db.ref(".info/connected");
+
+connected.on("value",snap=>{
+
+if(snap.val() === true){
+
+ref.onDisconnect().update({
+
+online:false,
+lastSeen:Date.now()
+
+});
+
+ref.update({
+
+online:true,
+lastSeen:Date.now()
+
+});
+
+}
+
+});
+
+}
+
+
+/* MEMBERS */
+
+function loadMembers(){
+
+db.ref("users")
+.on("value",snap=>{
+
+const box =
+document.getElementById("membersList");
+
+let html="";
+
+snap.forEach(child=>{
+
+const u=child.val();
+
+html+=`
+
+<div class="member">
+
+<div>
+
+<b>👤 ${escapeHTML(u.name)}</b>
+
+<br>
+
+${
+u.online
+?
+'<span class="online">🟢 Online</span>'
+:
+'⚫ Offline'
+}
+
+</div>
+
+<small>
+${
+u.online
+?
+"Active now"
+:
+"Last seen: "+
+formatDate(u.lastSeen)
+}
+</small>
+
+</div>
+
+`;
+
+});
+
+box.innerHTML =
+html || "<p>Hakuna members.</p>";
+
+});
+
+}
+
+
+/* ACTIVE */
+
+function loadActive(){
+
+db.ref("users")
+.on("value",snap=>{
+
+let count=0;
+let html="";
+
+snap.forEach(child=>{
+
+const u=child.val();
+
+if(u.online){
+
+count++;
+
+html+=`
+
+<div class="member">
+
+<b>👤 ${escapeHTML(u.name)}</b>
+
+<span class="online">
+🟢 ACTIVE
+</span>
+
+</div>
+
+`;
+
+}
+
+});
+
+document.getElementById(
+"activeCount"
+).innerHTML =
+"🟢 "+count+" Active";
+
+document.getElementById(
+"activeList"
+).innerHTML =
+html || "<p>Hakuna mtu active sasa.</p>";
+
+});
+
+}
+
+
+/* CHAT */
+
+function loadChat(){
+
+db.ref("chat")
+.limitToLast(100)
+.on("value",snap=>{
+
+const box =
+document.getElementById("chatBox");
+
+let html="";
+
+snap.forEach(child=>{
+
+const m=child.val();
+
+const me =
+currentUser &&
+m.uid===currentUser.uid;
+
+html+=`
+
+<div class="message ${me?"me":""}">
+
+<b>
+👤 ${escapeHTML(m.name)}
+</b>
+
+<br>
+
+<span>
+${escapeHTML(m.text)}
+</span>
+
+<br>
+
+<small>
+${formatDate(m.time)}
+</small>
+
+</div>
+
+`;
+
+});
+
+box.innerHTML =
+html || "<p>Hakuna message bado.</p>";
+
+box.scrollTop =
+box.scrollHeight;
+
+});
+
+}
+
+
+/* SEND CHAT */
+
+async function sendMessage(){
+
+if(!currentUser){
+
+alert("🔐 Ingia kwanza.");
+
+showPage("login");
+
+return;
+
+}
+
+const input =
+document.getElementById("chatMessage");
+
+const text =
+input.value.trim();
+
+if(!text)return;
+
+await db.ref("chat").push({
+
+uid:currentUser.uid,
+
+name:currentProfile.name,
+
+text:text,
+
+time:Date.now()
+
+});
+
+input.value="";
+
+}
+
+
+/* IMAGE PREVIEW */
+
+function previewImage(event){
+
+const file =
+event.target.files[0];
+
+if(!file)return;
+
+const preview =
+document.getElementById("imagePreview");
+
+preview.src =
+URL.createObjectURL(file);
+
+preview.classList.remove("hidden");
+
+}
+
+
+/* CREATE POST */
+
+async function createPost(){
+
+if(!currentUser){
+
+alert("🔐 Ingia kwanza.");
+
+showPage("login");
+
+return;
+
+}
+
+const file =
+document.getElementById("postImage").files[0];
+
+const caption =
+document.getElementById("postCaption").value.trim();
+
+
+if(!file){
+
+alert("📸 Chagua picha kwanza.");
+
+return;
+
+}
+
+
+if(file.size > 5*1024*1024){
+
+alert("❌ Picha iwe chini ya 5MB.");
+
+return;
+
+}
+
+
+const message =
+document.getElementById("postMessage");
+
+message.innerText =
+"⏳ Picha inapakiwa...";
+
+
+try{
+
+const path =
+"posts/"+currentUser.uid+"/"+Date.now()+"_"+file.name;
+
+const upload =
+await storage.ref(path).put(file);
+
+const imageURL =
+await upload.ref.getDownloadURL();
+
+
+await db.ref("posts").push({
+
+uid:currentUser.uid,
+
+name:currentProfile.name,
+
+caption:caption,
+
+image:imageURL,
+
+time:Date.now(),
+
+likes:0
+
+});
+
+
+message.innerText =
+"✅ Picha imepostwa.";
+
+document.getElementById(
+"postCaption"
+).value="";
+
+document.getElementById(
+"postImage"
+).value="";
+
+document.getElementById(
+"imagePreview"
+).classList.add("hidden");
+
+}catch(error){
+
+message.innerText =
+"❌ "+error.message;
+
+}
+
+}
+
+
+/* POSTS */
+
+function loadPosts(){
+
+db.ref("posts")
+.orderByChild("time")
+.on("value",snap=>{
+
+let posts=[];
+
+snap.forEach(child=>{
+
+posts.push({
+
+id:child.key,
+...child.val()
+
+});
+
+});
+
+posts.reverse();
+
+const box =
+document.getElementById("postList");
+
+box.innerHTML =
+posts.map(p=>`
+
+<div class="card">
+
+<b>
+👤 ${escapeHTML(p.name)}
+</b>
+
+<br>
+
+<small>
+${formatDate(p.time)}
+</small>
+
+${
+p.image
+?
+`<img class="postImg" src="${p.image}">`
+:
+""
+}
+
+<p>
+${escapeHTML(p.caption||"")}
+</p>
+
+<p
+class="like"
+onclick="likePost('${p.id}')"
+>
+
+❤️ ${p.likes||0} Like
+
+</p>
+
+</div>
+
+`).join("") ||
+"<p>Hakuna post bado.</p>";
+
+});
+
+}
+
+
+/* LIKE */
+
+async function likePost(id){
+
+const ref =
+db.ref("posts/"+id+"/likes");
+
+const snap =
+await ref.once("value");
+
+await ref.set(
+(snap.val()||0)+1
+);
+
+}
+
+
+/* TOURNAMENT */
+
+async function joinTournament(){
+
+if(!currentUser){
+
+alert("🔐 Login kwanza.");
+
+return;
+
+}
+
+const name =
+document.getElementById("playerName").value.trim();
+
+const phone =
+document.getElementById("playerPhone").value.trim();
+
+const game =
+document.getElementById("playerGame").value;
+
+
+if(!name || !phone){
+
+alert("Jaza jina na namba.");
+
+return;
+
+}
+
+
+await db.ref("players").push({
+
+uid:currentUser.uid,
+
+name:name,
+
+phone:phone,
+
+game:game,
+
+time:Date.now()
+
+});
+
+
+document.getElementById(
+"tournamentMessage"
+).innerHTML =
+"✅ Umejiandikisha.";
+
+}
+
+
+/* PLAYERS */
+
+function loadPlayers(){
+
+db.ref("players")
+.orderByChild("time")
+.on("value",snap=>{
+
+let html="";
+let i=0;
+
+snap.forEach(child=>{
+
+const p=child.val();
+
+i++;
+
+html+=`
+
+<div class="member">
+
+<div>
+
+<b>
+#${i} ${escapeHTML(p.name)}
+</b>
+
+<br>
+
+🎮 ${escapeHTML(p.game)}
+
+</div>
+
+<span class="badge">
+REGISTERED
+</span>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"playersList"
+).innerHTML =
+html || "<p>Hakuna washiriki.</p>";
+
+});
+
+}
+
+
+/* PAYMENT */
+
+async function submitPayment(){
+
+if(!currentUser){
+
+alert("🔐 Login kwanza.");
+
+showPage("login");
+
+return;
+
+}
+
+const type =
+document.getElementById("paymentType").value;
+
+const amount =
+document.getElementById("paymentAmount").value;
+
+const transaction =
+document.getElementById("transactionId").value.trim();
+
+const phone =
+document.getElementById("paymentPhone").value.trim();
+
+
+if(!amount || !transaction || !phone){
+
+alert(
+"❌ Jaza kiasi, Transaction ID na namba."
+);
+
+return;
+
+}
+
+
+await db.ref("payments").push({
+
+uid:currentUser.uid,
+
+name:currentProfile.name,
+
+type:type,
+
+amount:Number(amount),
+
+transactionId:transaction,
+
+phone:phone,
+
+status:"Pending",
+
+time:Date.now()
+
+});
+
+
+document.getElementById(
+"paymentMessage"
+).innerHTML =
+"✅ Taarifa za malipo zimetumwa. Zinasubiri kuthibitishwa.";
+
+loadPayments();
+
+}
+
+
+/* PAYMENTS */
+
+function loadPayments(){
+
+if(!currentUser){
+
+document.getElementById(
+"myPayments"
+).innerHTML =
+"Ingia kwanza.";
+
+return;
+
+}
+
+db.ref("payments")
+.orderByChild("uid")
+.equalTo(currentUser.uid)
+.on("value",snap=>{
+
+let html="";
+
+snap.forEach(child=>{
+
+const p=child.val();
+
+let cls =
+p.status==="Approved"
+?
+"approved"
+:
+p.status==="Rejected"
+?
+"rejected"
+:
+"pending";
+
+html+=`
+
+<div class="card">
+
+<b>
+${escapeHTML(p.type)}
+</b>
+
+<p>
+💰 TSh ${Number(p.amount).toLocaleString()}
+</p>
+
+<p>
+🧾 ${escapeHTML(p.transactionId)}
+</p>
+
+<p>
+📞 ${escapeHTML(p.phone)}
+</p>
+
+<span class="status ${cls}">
+${escapeHTML(p.status)}
+</span>
+
+<br><br>
+
+<small>
+${formatDate(p.time)}
+</small>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"myPayments"
+).innerHTML =
+html || "<p>Hakuna malipo bado.</p>";
+
+});
+
+}
+
+
+/* ADVICE */
+
+async function sendAdvice(){
+
+if(!currentUser){
+
+alert("🔐 Ingia kwanza.");
+
+return;
+
+}
+
+const text =
+document.getElementById("adviceText").value.trim();
+
+if(!text){
+
+alert("Andika ushauri.");
+
+return;
+
+}
+
+await db.ref("advice").push({
+
+uid:currentUser.uid,
+
+name:currentProfile.name,
+
+text:text,
+
+time:Date.now()
+
+});
+
+document.getElementById(
+"adviceText"
+).value="";
+
+document.getElementById(
+"adviceMessage"
+).innerText =
+"✅ Ushauri umetumwa.";
+
+}
+
+
+/* LOAD ADVICE */
+
+function loadAdvice(){
+
+db.ref("advice")
+.orderByChild("time")
+.on("value",snap=>{
+
+let arr=[];
+
+snap.forEach(child=>{
+
+arr.push(child.val());
+
+});
+
+arr.reverse();
+
+document.getElementById(
+"adviceList"
+).innerHTML =
+arr.map(a=>`
+
+<div class="card">
+
+<b>
+👤 ${escapeHTML(a.name)}
+</b>
+
+<p>
+${escapeHTML(a.text)}
+</p>
+
+<small>
+${formatDate(a.time)}
+</small>
+
+</div>
+
+`).join("") ||
+"<p>Hakuna ushauri bado.</p>";
+
+});
+
+}
+
+
+/* SECURITY HELPERS */
+
+function escapeHTML(value){
+
+return String(value||"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+/* DATE */
+
+function formatDate(timestamp){
+
+if(!timestamp)
+return "N/A";
+
+return new Date(timestamp)
+.toLocaleString("sw-TZ");
+
+}
+
+
+/* START */
+
+showPage("home");
+
+</script>
+
+</body>
+</html>
